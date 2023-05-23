@@ -1,0 +1,53 @@
+{% extends 'test2/main.html' %}
+{% block content %}
+{% include 'test2/status.html' %}
+<br>
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card card-body">
+                            <form method="get">
+                                {% if myFilter.form %}
+                                    {{ myFilter.form }}
+                                {% else %}
+                                    <p>No orders found.</p>
+                                {% endif %}
+                            <button class="btn btn-primary" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Status</th>
+                        <th>Note</th>
+                        <th>Date Ordered</th>
+                    </tr>
+
+                    {% for order in orders %}
+                        {% if order.customer.user == request.user %}
+                            <tr>
+                                <td>{{ order.customer.name }}</td>
+                                <td>{{ order.product }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>{{ order.note }}</td>
+                                <td>{{ order.date_created }}</td>
+                                
+                            </tr>
+                        {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No orders found.</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+
+{% extends 'test2/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<br>
+    <div class="row">
+        <div class="col=md-2">
+            <div class="card card-body">
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h4>Add new Customer: </h4>
+                    <hr>
+                        <span>Name: </span>{{form.name}}
+                        <span>Email: </span>{{form.email}}
+                        <span>Phone: </span>{{form.phone}}
+
+                    
+                    <input type="submit" name="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
